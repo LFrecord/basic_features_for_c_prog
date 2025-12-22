@@ -15,11 +15,12 @@
 
 enum vector_return_codes
 {
-    VECTOR_POS_CASE,
-    VECTOR_VAR_ERR,
-    VECTOR_MALLOC_ERR,
-    VECTOR_DATA_MALLOC_ERR,
-    VECTOR_REALLOC_ERR
+    VECTOR_POS_CASE = 0,
+    VECTOR_VAR_ERR = 1,
+    VECTOR_MALLOC_ERR = 2,
+    VECTOR_DATA_MALLOC_ERR = 3,
+    VECTOR_REALLOC_ERR = 4,
+    VECTOR_INDX_OUT_OF_RANGE_ERR = 5
 };
 
 typedef struct __vector_type__ *vector_t;
@@ -88,6 +89,16 @@ int insert_vector(vector container, void *p_elem, size_t index);
  * \return - VECTOR_POS_CASE или код ошибки
  */
 void *at_vector(vector container, int index);
+
+/**
+ * Изменяет элемент по индексу
+ * \param[in,out] container - Описатель вектора
+ * \param[in] index - Индекс заменяемого элемента
+ * \param[in] p_elem - Указатель на новый элемент
+ * 
+ * \return - VECTOR_POS_CASE или код ошибки
+ */
+int change_elem_vector(vector container, size_t index, void *p_elem);
 
 /**
  * Возвращает длину вектора (количество записанных элементов)

@@ -113,6 +113,16 @@ int insert_vector(vector container, void *p_elem, size_t index)
     return rc;
 }
 
+int change_elem_vector(vector container, size_t index, void *p_elem)
+{
+    int rc = (container == NO_VECTOR || p_elem == NULL) ? VECTOR_VAR_ERR : VECTOR_POS_CASE;
+    if (rc == VECTOR_POS_CASE && index >= container->elems_amount)
+        rc = VECTOR_INDX_OUT_OF_RANGE_ERR;
+    if (rc == VECTOR_POS_CASE)
+        memcpy((void*)((char*)container->data + container->size * index), p_elem, container->size);
+    return rc;
+}
+
 void *at_vector(vector container, int index)
 {
     void *rp = NULL;
