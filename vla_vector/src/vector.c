@@ -62,7 +62,7 @@ int init_vector(vector *container, size_t elem_size)
 
 int free_vector(vector *container)
 {
-    int rc = (container == NULL) ? VECTOR_VAR_ERR : VECTOR_POS_CASE;
+    int rc = (container == NULL || *container == NO_VECTOR) ? VECTOR_VAR_ERR : VECTOR_POS_CASE;
     if (rc == VECTOR_POS_CASE)
     {
         free((*container)->data);
@@ -96,7 +96,7 @@ int pop_back_vector(vector container)
 
 int insert_vector(vector container, void *p_elem, size_t index)
 {
-    int rc = (container == NO_VECTOR || p_elem == NULL) ? VECTOR_POS_CASE : VECTOR_POS_CASE;
+    int rc = (container == NO_VECTOR || p_elem == NULL) ? VECTOR_VAR_ERR : VECTOR_POS_CASE;
     if (rc == VECTOR_POS_CASE && container->elems_amount == container->capacity)
         rc = increase_data(container);
     if (rc == VECTOR_POS_CASE)
